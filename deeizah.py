@@ -1,5 +1,44 @@
-
+import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
+
+st.image('e-commerce-png-ecommerce-png-png-image-510.png')
+
+st.date_input("Select a date")
+
+st.title("""Welcome to my Dashboard
+This is my first time using streamlit.""")
+
+#upload data
+#upload_file = st.file_uploader("Please upload here:", type = 'csv')
+
+
+#df = pd.read_csv(r"C:\Users\welcome\Desktop\BSMS1306\streamlit\Tips.csv")
+df = pd.read_csv("ecommerce_customer_data_large.csv")
+#df = pd.read_csv(upload_file)
+
+#show data
+st.subheader("Raw Data")
+st.write(df)
+
+#histogram
+st.subheader("Histogram")
+column = st.selectbox("Choose a column",df.columns)
+fig, ax = plt.subplots(figsize = (10,6))
+df[column].plot(kind = 'hist', ax =ax)
+st.pyplot(fig)
+#fig = px.histogram(df, x=column)
+#fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
+#st.plotly_chart(fig)
+
+#Scatter chart
+st.subheader("Scatter Chart")
+x_column = st.selectbox("Choose x-axis column",df.columns)
+y_column = st.selectbox("Choose y-axis column",df.columns)
+fig, ax = plt.subplots(figsize = (10,6))
+df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
+st.pyplot(fig)
 
 import pandas as pd
 
@@ -15,7 +54,6 @@ data.info ()
 summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
 
 print (summary)
-### OBJECTIVE 1
 revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mean ().reset_index()
 
 revenue_summary.columns = ['Product Category','Average Purchase Amount']       
@@ -174,3 +212,219 @@ try:
 
 except Exception as e:
     print(f" An error occurred: {e}")
+
+
+# INTERACTIVE GRAPH 
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+
+st.set_page_config(
+    page_title="E-Commerce Dashboard",
+    page_icon="📊",
+    layout="wide"
+)
+
+st.title("📊 Interactive E-Commerce Dashboard")
+st.markdown("Explore customer purchase data with interactive charts and filters.")
+
+# -----------------------------
+# Load Data
+# -----------------------------
+@st.cache_data
+def load_data():
+    df = pd.read_csv("ecommerce_customer_data_large.csv")
+
+    # Convert Purchase Date if available
+    if "Purchase Date" in df.columns:
+        df["Purchase Date"] = pd.to_datetime(
+            df["Purchase Date"], errors="coerce"
+        )
+
+    return df
+
+
+df = load_data()
+
+
+st.sidebar.header("Filters")
+
+filtered_df = df.copy()
+
+# Product Category Filter
+if "Product Category" in df.columns:
+    categories = ["All"] + sorted(df["Product Category"].dropna().unique().tolist())
+    selected_category = st.sidebar.selectbox(
+        "Product Category",
+        categories
+    )
+
+    if selected_category != "All":
+        filtered_df = filtered_df[
+            filtered_df["Product Category"] == selected_category
+        ]
+
+# Payment Method Filter
+if "Payment Method" in df.columns:
+    methods = ["All"] + sorted(df["Payment Method"].dropna().unique().tolist())
+    selected_method = st.sidebar.selectbox(
+        "Payment Method",
+        methods
+    )
+
+    if selected_method != "All":
+        filtered_df = filtered_df[
+            filtered_df["Payment Method"] == selected_method
+        ]
+
+
+st.subheader("Dashboard Summary")
+
+col1, col2, col3 = st.columns(3)
+
+if "Total Purchase Amount" in filtered_df.columns:
+    total_sales = filtered_df["Total Purchase Amount"].sum()
+    avg_sales = filtered_df["Total Purchase Amount"].mean()
+else:
+    total_sales = 0
+    avg_sales = 0
+
+total_customers = len(filtered_df)
+
+col1.metric("Total Sales", f"${total_sales:,.2f}")
+col2.metric("Average Purchase", f"${avg_sales:,.2f}")
+col3.metric("Transactions", total_customers)
+
+st.divider()
+
+
+left, right = st.columns(2)
+
+# Sales by Category
+with left:
+    if (
+        "Product Category" in filtered_df.columns
+        and "Total Purchase Amount" in filtered_df.columns
+    ):
+        category_sales = (
+            filtered_df.groupby("Product Category")[
+                "Total Purchase Amount"
+            ]
+            .sum()
+            .reset_index()
+        )
+
+        fig = px.bar(
+            category_sales,
+            x="Product Category",
+            y="Total Purchase Amount",
+            color="Product Category",
+            text_auto=".2s",
+            title="Sales by Product Category"
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+# Payment Method Distribution
+with right:
+    if "Payment Method" in filtered_df.columns:
+        payment = (
+            filtered_df.groupby("Payment Method")
+            .size()
+            .reset_index(name="Count")
+        )
+
+        fig = px.pie(
+            payment,
+            names="Payment Method",
+            values="Count",
+            hole=0.45,
+            title="Payment Method Distribution"
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+if (
+    "Purchase Date" in filtered_df.columns
+    and "Total Purchase Amount" in filtered_df.columns
+):
+    temp = filtered_df.copy()
+    temp["Month"] = temp["Purchase Date"].dt.strftime("%Y-%m")
+
+    monthly = (
+        temp.groupby("Month")["Total Purchase Amount"]
+        .sum()
+        .reset_index()
+    )
+
+    fig = px.line(
+        monthly,
+        x="Month",
+        y="Total Purchase Amount",
+        markers=True,
+        title="Monthly Sales Trend"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
+if (
+    "Product Price" in filtered_df.columns
+    and "Total Purchase Amount" in filtered_df.columns
+):
+    sample_df = (
+        filtered_df.sample(
+            min(len(filtered_df), 5000),
+            random_state=42
+        )
+        if len(filtered_df) > 0
+        else filtered_df
+    )
+
+    hover_cols = [
+        c
+        for c in ["Customer Name", "Product Category", "Payment Method"]
+        if c in sample_df.columns
+    ]
+
+    color_col = (
+        "Product Category"
+        if "Product Category" in sample_df.columns
+        else None
+    )
+
+    fig = px.scatter(
+        sample_df,
+        x="Product Price",
+        y="Total Purchase Amount",
+        color=color_col,
+        hover_data=hover_cols,
+        title="Product Price vs Total Purchase Amount"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
+if "Total Purchase Amount" in filtered_df.columns:
+    fig = px.histogram(
+        filtered_df,
+        x="Total Purchase Amount",
+        nbins=30,
+        title="Distribution of Purchase Amount"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
+st.subheader("Dataset Preview")
+st.dataframe(filtered_df, use_container_width=True)
+
+csv = filtered_df.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="📥 Download Filtered Data",
+    data=csv,
+    file_name="filtered_data.csv",
+    mime="text/csv",
+)
