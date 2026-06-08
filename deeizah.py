@@ -216,7 +216,7 @@ with tab3:
     ax1.set_title('Return Rates by Product Category (%)')
     ax1.set_xlabel('Product Category')
     ax1.set_ylabel('Return Rate (%)')
-     ax1.set_ylim(
+    ax1.set_ylim(
         category_returns['Return Rate (%)'].min() - 1,
         category_returns['Return Rate (%)'].max() + 1
         )
