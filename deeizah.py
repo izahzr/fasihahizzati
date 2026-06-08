@@ -104,7 +104,7 @@ plt.xlabel('Product Category', fontsize = 12)
 plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
 
 plt.tight_layout()
-plt.pyplot(fig)
+st.pyplot(fig)
 
 st.subheader("OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)")
 
