@@ -103,6 +103,13 @@ plt.title ('Average Purchase Amount by Product Category', fontsize = 14, pad = 1
 plt.xlabel('Product Category', fontsize = 12)
 plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
 
+st.subheader("Table: Average Purchase Amount by Product Category")
+
+st.dataframe(
+    revenue_summary.reset_index(drop=True),
+    use_container_width=True
+)
+
 plt.tight_layout()
 st.pyplot(fig)
 
