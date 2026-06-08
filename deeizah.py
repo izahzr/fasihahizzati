@@ -104,7 +104,7 @@ data = df.copy()
 data.dropna(inplace=True)
 
     # 1. Segment Age into clean blocks
-    data['Age Group'] = pd.cut(data['Age'], 
+data['Age Group'] = pd.cut(data['Age'], 
                                bins=[0, 25, 45, 65, 120], 
                                labels=['Youth', 'Young Adult', 'Middle Aged', 'Senior'])
 
@@ -160,7 +160,7 @@ import zipfile
 
 data = df.copy()
             
-    data.dropna(inplace=True)
+data.dropna(inplace=True)
 
     #  Determine the most used payment methods (Transaction Counts)
     payment_counts = data['Payment Method'].value_counts().reset_index()
