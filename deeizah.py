@@ -7,7 +7,7 @@ st.image('e-commerce-png-ecommerce-png-png-image-510.png')
 
 st.date_input("Select a date")
 
-st.title("""Welcome to my Dashboard
+st.title("""Welcome to my our E-commerce Dashboard
 This is my first time using streamlit.""")
 
 #upload data
@@ -54,6 +54,9 @@ data.info ()
 summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
 
 print (summary)
+
+#Objective 1
+
 revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mean ().reset_index()
 
 revenue_summary.columns = ['Product Category','Average Purchase Amount']       
@@ -152,6 +155,7 @@ try:
 
 except Exception as e:
     print(f" An error occurred: {e}")
+    
 # OBJECTIVE 3: Payment Preferences and Product Returns 
 
 import pandas as pd
@@ -229,9 +233,6 @@ st.set_page_config(
 st.title("📊 Interactive E-Commerce Dashboard")
 st.markdown("Explore customer purchase data with interactive charts and filters.")
 
-# -----------------------------
-# Load Data
-# -----------------------------
 @st.cache_data
 def load_data():
     df = pd.read_csv("ecommerce_customer_data_large.csv")
