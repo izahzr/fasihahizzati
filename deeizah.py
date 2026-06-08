@@ -127,27 +127,27 @@ print(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segme
 print(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
 
     
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
 
     # LEFT CHART: Pie Chart showing overall Age Group contribution
-    ax1.pie(age_spending['Total Purchase Amount'], 
-            labels=age_spending['Age Group'], 
-            autopct='%1.1f%%', 
-            startangle=140, 
-            colors=['#ff9999','#66b3ff','#99ff99','#ffcc99'])
-    ax1.set_title('Overall Sales Contribution by Age Group', fontsize=12, fontweight='bold')
+ax1.pie(age_spending['Total Purchase Amount'], 
+        labels=age_spending['Age Group'], 
+        autopct='%1.1f%%', 
+        startangle=140, 
+        colors=['#ff9999','#66b3ff','#99ff99','#ffcc99'])
+ax1.set_title('Overall Sales Contribution by Age Group', fontsize=12, fontweight='bold')
 
     # RIGHT CHART: Grouped Bar Chart showing the interaction of Age Group & Gender
-    sns.barplot(data=data, x='Age Group', y='Total Purchase Amount', hue='Gender', 
-                estimator=sum, errorbar=None, palette='muted', ax=ax2)
-    ax2.set_title('Revenue Distribution by Combined Age & Gender', fontsize=12, fontweight='bold')
-    ax2.set_xlabel('Age Group')
-    ax2.set_ylabel('Total Sales ($)')
-    ax2.grid(axis='y', linestyle='--', alpha=0.5)
+sns.barplot(data=data, x='Age Group', y='Total Purchase Amount', hue='Gender', 
+            estimator=sum, errorbar=None, palette='muted', ax=ax2)
+ax2.set_title('Revenue Distribution by Combined Age & Gender', fontsize=12, fontweight='bold')
+ax2.set_xlabel('Age Group')
+ax2.set_ylabel('Total Sales ($)')
+ax2.grid(axis='y', linestyle='--', alpha=0.5)
 
     
-    plt.tight_layout()
-    st.pyplot(fig)
+plt.tight_layout()
+st.pyplot(fig)
 
 except Exception as e:
     print(f" An error occurred: {e}")
@@ -163,44 +163,44 @@ data = df.copy()
 data.dropna(inplace=True)
 
     #  Determine the most used payment methods (Transaction Counts)
-    payment_counts = data['Payment Method'].value_counts().reset_index()
-    payment_counts.columns = ['Payment Method', 'Transaction Count']
+payment_counts = data['Payment Method'].value_counts().reset_index()
+payment_counts.columns = ['Payment Method', 'Transaction Count']
     
     # Investigate if certain product categories are more prone to returns
-    category_returns = data.groupby('Product Category')['Returns'].mean().reset_index()
-    category_returns['Return Rate (%)'] = category_returns['Returns'] * 100
+category_returns = data.groupby('Product Category')['Returns'].mean().reset_index()
+category_returns['Return Rate (%)'] = category_returns['Returns'] * 100
 
     # Investigate if certain PAYMENT TYPES are more prone to returns
-    payment_returns = data.groupby('Payment Method')['Returns'].mean().reset_index()
-    payment_returns['Return Rate (%)'] = payment_returns['Returns'] * 100
+payment_returns = data.groupby('Payment Method')['Returns'].mean().reset_index()
+payment_returns['Return Rate (%)'] = payment_returns['Returns'] * 100
 
     # Display all tables 
-    print("--- 1. Most Used Payment Methods ---")
-    print(payment_counts)
-    print("\n--- 2. Return Rates by Product Category ---")
-    print(category_returns[['Product Category', 'Return Rate (%)']])
-    print("\n--- 3. Return Rates by Payment Method ---")
-    print(payment_returns[['Payment Method', 'Return Rate (%)']])
+print("--- 1. Most Used Payment Methods ---")
+print(payment_counts)
+print("\n--- 2. Return Rates by Product Category ---")
+print(category_returns[['Product Category', 'Return Rate (%)']])
+print("\n--- 3. Return Rates by Payment Method ---")
+print(payment_returns[['Payment Method', 'Return Rate (%)']])
 
    
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
 
     # Left Chart: Returns by Category
-    ax1.bar(category_returns['Product Category'], category_returns['Return Rate (%)'], color='#E74C3C', edgecolor='black')
-    ax1.set_title('Return Rates by Product Category (%)')
-    ax1.set_xlabel('Product Category')
-    ax1.set_ylabel('Return Rate (%)')
-    ax1.grid(axis='y', linestyle='--', alpha=0.7)
+ax1.bar(category_returns['Product Category'], category_returns['Return Rate (%)'], color='#E74C3C', edgecolor='black')
+ax1.set_title('Return Rates by Product Category (%)')
+ax1.set_xlabel('Product Category')
+ax1.set_ylabel('Return Rate (%)')
+ax1.grid(axis='y', linestyle='--', alpha=0.7)
 
     # Right Chart: Returns by Payment Method
-    ax2.bar(payment_returns['Payment Method'], payment_returns['Return Rate (%)'], color='#34495E', edgecolor='black')
-    ax2.set_title('Return Rates by Payment Method (%)')
-    ax2.set_xlabel('Payment Method')
-    ax2.set_ylabel('Return Rate (%)')
-    ax2.grid(axis='y', linestyle='--', alpha=0.7)
+ax2.bar(payment_returns['Payment Method'], payment_returns['Return Rate (%)'], color='#34495E', edgecolor='black')
+ax2.set_title('Return Rates by Payment Method (%)')
+ax2.set_xlabel('Payment Method')
+ax2.set_ylabel('Return Rate (%)')
+ax2.grid(axis='y', linestyle='--', alpha=0.7)
 
-    plt.tight_layout()
-    st.pyplot(fig)
+plt.tight_layout()
+st.pyplot(fig)
 
 except Exception as e:
     print(f" An error occurred: {e}")
@@ -226,12 +226,12 @@ def load_data():
     df = pd.read_csv("ecommerce_customer_data_large.csv")
 
     # Convert Purchase Date if available
-    if "Purchase Date" in df.columns:
+if "Purchase Date" in df.columns:
         df["Purchase Date"] = pd.to_datetime(
-            df["Purchase Date"], errors="coerce"
+        df["Purchase Date"], errors="coerce"
         )
 
-    return df
+return df
 
 
 df = load_data()
