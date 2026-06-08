@@ -223,7 +223,7 @@ def load_data():
     df = pd.read_csv("ecommerce_customer_data_large.csv")
 
     # Convert Purchase Date if available
-if "Purchase Date" in df.columns:
+    if "Purchase Date" in df.columns:
         df["Purchase Date"] = pd.to_datetime(
         df["Purchase Date"], errors="coerce"
         )
