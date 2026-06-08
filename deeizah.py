@@ -72,7 +72,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 DF = pd.read_csv ('product_summary.csv')
-DF.info()
 fig, ax = plt.subplots (figsize =(10,6))
 category_colors = 'Set2'
 
