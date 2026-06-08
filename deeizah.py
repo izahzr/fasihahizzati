@@ -7,7 +7,7 @@ st.image('e-commerce-png-ecommerce-png-png-image-510.png')
 
 st.date_input("Select a date")
 
-st.title("""Welcome to my our E-commerce Dashboard
+st.title("""Welcome to our E-commerce Dashboard
 This is my first time using streamlit.""")
 
 #upload data
