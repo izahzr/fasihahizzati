@@ -53,7 +53,6 @@ data.isnull().sum()
 data.dropna (inplace =  True )
 data.isnull().sum()
 data.duplicated ().sum ()
-data
 data.info ()
 summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
 
