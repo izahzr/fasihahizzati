@@ -137,12 +137,12 @@ with tab2:
     st.write("### 2. Spending by Gender")
     st.dataframe(gender_spending, use_container_width=True)
 
-    st.write("\n--- 3. Platform Core Customer Rankings (Combined Profile) ---")
+    st.write("### 3. Platform Core Customer Rankings (Combined Profile) ")
     st.dataframe(core_profile)
     
     top_segment = core_profile.iloc[0]
-    st.write(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
-    st.write(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
+    st.write("###IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
+    st.write("###Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
 
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
