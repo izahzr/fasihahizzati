@@ -8,7 +8,7 @@ st.set_page_config(
     page_title="E-Commerce Dashboard",
     page_icon="📊",
     layout="wide"
-
+)
 st.date_input("Select a date")
 
 st.title("""Welcome to our E-commerce Dashboard
