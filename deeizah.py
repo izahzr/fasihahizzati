@@ -55,7 +55,6 @@ with tab1:
     st.subheader("Objective 1 : Average Purchase Amount by Product Category")
     import pandas as pd
 
-    data = pd.read_csv("ecommerce_customer_data_large.csv")
     data.info ()
     data.isnull().sum()
     data.dropna (inplace =  True )
@@ -100,10 +99,11 @@ with tab1:
             ha='center',
             va='bottom'
         )
+    ax.set_title('Average Purchase Amount by Product Category', fontsize=14, fontweight='bold')
+    ax.set_xlabel('Product Category')
+    ax.set_ylabel('Average Purchase Amount ($)')
     ax.grid(axis='y', linestyle='--', alpha=0.7)
-    plt.title ('Average Purchase Amount by Product Category', fontsize = 14, pad = 15, fontweight = 'bold')
-    plt.xlabel('Product Category', fontsize = 12)
-    plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
+
 
     st.dataframe(
         revenue_summary.reset_index(drop=True),
