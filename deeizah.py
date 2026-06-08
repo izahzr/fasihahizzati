@@ -141,8 +141,8 @@ with tab2:
     st.dataframe(core_profile)
     
     top_segment = core_profile.iloc[0]
-    st.write(f"### IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
-    st.write(f"### Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
+    st.write("### IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
+    st.write("### Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
 
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
