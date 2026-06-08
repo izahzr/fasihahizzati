@@ -99,15 +99,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import zipfile
 
-zip_file_name = "archive (7).zip"
-
-try:
-    with zipfile.ZipFile(zip_file_name, 'r') as z:
-        file_list = z.namelist()
-        csv_files = [f for f in file_list if f.endswith('.csv')]
-        target_csv = csv_files[0]
-        with z.open(target_csv) as f:
-            data = pd.read_csv(f)
+data = df.copy()
             
     data.dropna(inplace=True)
 
@@ -166,15 +158,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import zipfile
 
-zip_file_name = "archive (7).zip"
-
-try:
-    with zipfile.ZipFile(zip_file_name, 'r') as z:
-        file_list = z.namelist()
-        csv_files = [f for f in file_list if f.endswith('.csv')]
-        target_csv = csv_files[0]
-        with z.open(target_csv) as f:
-            data = pd.read_csv(f)
+data = df.copy()
             
     data.dropna(inplace=True)
 
