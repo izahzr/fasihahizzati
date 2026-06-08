@@ -54,13 +54,7 @@ tab1, tab2, tab3 = st.tabs([
 with tab1: 
     st.subheader("Objective 1 : Average Purchase Amount by Product Category")
     import pandas as pd
-
-    data.info ()
-    data.isnull().sum()
-    data.dropna (inplace =  True )
-    data.isnull().sum()
-    data.duplicated ().sum ()
-    data.info ()
+    data = pd.read_csv("ecommerce_customer_data_large.csv")
     summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
 
     revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mean ().reset_index()
