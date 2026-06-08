@@ -149,8 +149,7 @@ ax2.grid(axis='y', linestyle='--', alpha=0.5)
 plt.tight_layout()
 st.pyplot(fig)
 
-except Exception as e:
-    print(f" An error occurred: {e}")
+
     
 # OBJECTIVE 3: Payment Preferences and Product Returns 
 
