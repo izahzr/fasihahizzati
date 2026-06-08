@@ -11,7 +11,7 @@ st.set_page_config(
 )
 st.date_input("Select a date")
 
-st.title("""Welcome to our E-commerce Dashboard
+st.title(""" 📊 Welcome to our E-commerce Dashboard
 This is my first time using streamlit.""")
 
 #upload data
