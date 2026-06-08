@@ -101,7 +101,7 @@ import zipfile
 
 data = df.copy()
             
-    data.dropna(inplace=True)
+data.dropna(inplace=True)
 
     # 1. Segment Age into clean blocks
     data['Age Group'] = pd.cut(data['Age'], 
