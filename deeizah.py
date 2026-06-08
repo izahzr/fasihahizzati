@@ -59,7 +59,7 @@ summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min
 
 print (summary)
 
-#Objective 1
+#Objective 1 : Average Purchase Amount by Product Category
 
 revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mean ().reset_index()
 
@@ -74,14 +74,14 @@ import seaborn as sns
 
 DF = pd.read_csv ('product_summary.csv')
 DF.info()
-fig, axes = plt.subplots (figsize = (10,6))
+fig, ax = plt.subplots (figsize =(10,6))
 category_colors = 'Set2'
 
 sns.barplot( 
-    x = 'Product Category',
-    y = 'Average Purchase Amount',
+    x ='Product Category',
+    y ='Average Purchase Amount',
     data = revenue_summary,
-    palette = category_colors,
+    palette = 'Set2',
     hue = 'Product Category',
     legend = False,
 )
@@ -91,7 +91,7 @@ plt.xlabel('Product Category', fontsize = 12)
 plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
 
 plt.tight_layout()
-plt.show()
+st.pyplot(fig)
 # OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)
 
 import pandas as pd
@@ -155,7 +155,7 @@ try:
 
     
     plt.tight_layout()
-    plt.show()
+    st.pyplot(fig)
 
 except Exception as e:
     print(f" An error occurred: {e}")
@@ -216,7 +216,7 @@ try:
     ax2.grid(axis='y', linestyle='--', alpha=0.7)
 
     plt.tight_layout()
-    plt.show()
+    st.pyplot(fig)
 
 except Exception as e:
     print(f" An error occurred: {e}")
