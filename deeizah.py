@@ -160,13 +160,7 @@ with tab2:
             startangle=140, 
             colors=['#ff9999','#66b3ff','#99ff99','#ffcc99'])
     ax1.set_title('Overall Sales Contribution by Age Group', fontsize=12, fontweight='bold')
-    ax1.set_ylim(
-        category_returns['Return Rate (%)'].min() - 1,
-        category_returns['Return Rate (%)'].max() + 1
-        )
-
-    ax1.grid(axis='y', linestyle='--', alpha=0.7)
-
+   
     # RIGHT CHART: Grouped Bar Chart showing the interaction of Age Group & Gender
     sns.barplot(data=data, x='Age Group', y='Total Purchase Amount', hue='Gender', 
                 estimator=sum, errorbar=None, palette='muted', ax=ax2)
@@ -175,11 +169,6 @@ with tab2:
     ax2.set_ylabel('Total Sales ($)')
     ax2.grid(axis='y', linestyle='--', alpha=0.5)
 
-    ax2.set_ylim(
-        payment_returns['Return Rate (%)'].min() - 1,
-        payment_returns['Return Rate (%)'].max() + 1
-    )
-    ax2.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
     st.pyplot(fig)
 
@@ -227,6 +216,10 @@ with tab3:
     ax1.set_title('Return Rates by Product Category (%)')
     ax1.set_xlabel('Product Category')
     ax1.set_ylabel('Return Rate (%)')
+     ax1.set_ylim(
+        category_returns['Return Rate (%)'].min() - 1,
+        category_returns['Return Rate (%)'].max() + 1
+        )
     ax1.grid(axis='y', linestyle='--', alpha=0.7)
 
     # Right Chart: Returns by Payment Method
@@ -234,7 +227,11 @@ with tab3:
     ax2.set_title('Return Rates by Payment Method (%)')
     ax2.set_xlabel('Payment Method')
     ax2.set_ylabel('Return Rate (%)')
-    ax2.grid(axis='y', linestyle='--', alpha=0.7)
+    ax2.set_ylim(
+        payment_returns['Return Rate (%)'].min() - 1,
+        payment_returns['Return Rate (%)'].max() + 1
+    )
+     ax2.grid(axis='y', linestyle='--', alpha=0.7)
 
     plt.tight_layout()
     st.pyplot(fig)
