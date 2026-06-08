@@ -137,16 +137,18 @@ with tab2:
     core_profile = core_profile.sort_values(by='Total Purchase Amount', ascending=False).reset_index(drop=True)
 
     # Display tables
-    print("--- 1. Spending by Age Group ---")
-    print(age_spending)
-    print("\n--- 2. Spending by Gender ---")
-    print(gender_spending)
-    print("\n--- 3. Platform Core Customer Rankings (Combined Profile) ---")
-    print(core_profile)
+    st.write("### 1. Spending by Age Group")
+    st.dataframe(age_spending, use_container_width=True)
+
+    st.write("### 2. Spending by Gender")
+    st.dataframe(gender_spending, use_container_width=True)
+
+    st.write("\n--- 3. Platform Core Customer Rankings (Combined Profile) ---")
+    st.dataframe(core_profile)
     
     top_segment = core_profile.iloc[0]
-    print(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
-    print(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
+    st.write(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
+    st.write(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
 
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
@@ -196,12 +198,16 @@ with tab3:
     payment_returns['Return Rate (%)'] = payment_returns['Returns'] * 100
 
     # Display all tables 
-    print("--- 1. Most Used Payment Methods ---")
-    print(payment_counts)
-    print("\n--- 2. Return Rates by Product Category ---")
-    print(category_returns[['Product Category', 'Return Rate (%)']])
-    print("\n--- 3. Return Rates by Payment Method ---")
-    print(payment_returns[['Payment Method', 'Return Rate (%)']])
+    st.write("### 1. Most Used Payment Methods")
+    st.dataframe(payment_counts, use_container_width=True)
+
+    st.write("### 2. Return Rates by Product Category")
+    st.dataframe(category_returns[['Product Category', 'Return Rate (%)']],
+             use_container_width=True)
+
+    st.write("### 3. Return Rates by Payment Method")
+    st.dataframe(payment_returns[['Payment Method', 'Return Rate (%)']],
+             use_container_width=True)
 
    
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
