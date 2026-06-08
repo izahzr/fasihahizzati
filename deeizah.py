@@ -62,7 +62,6 @@ revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mea
 revenue_summary.columns = ['Product Category','Average Purchase Amount']       
 revenue_summary = revenue_summary.sort_values(by = 'Average Purchase Amount', ascending = False)
                                
-print (revenue_summary)
 revenue_summary.to_csv ('product_summary.csv',index = False)
 import pandas as pd
 import matplotlib.pyplot as plt
