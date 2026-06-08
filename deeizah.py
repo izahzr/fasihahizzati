@@ -44,6 +44,7 @@ fig, ax = plt.subplots(figsize = (10,6))
 df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
 st.pyplot(fig)
 
+print ('Objective 1 : Average Purchase Amount by Product Category')
 import pandas as pd
 
 data = pd.read_csv("ecommerce_customer_data_large.csv")
@@ -58,8 +59,6 @@ data.info ()
 summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
 
 print (summary)
-
-#Objective 1 : Average Purchase Amount by Product Category
 
 revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mean ().reset_index()
 
@@ -92,7 +91,8 @@ plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
 
 plt.tight_layout()
 st.pyplot(fig)
-# OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)
+
+print('OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)')
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -151,7 +151,7 @@ st.pyplot(fig)
 
 
     
-# OBJECTIVE 3: Payment Preferences and Product Returns 
+print ('OBJECTIVE 3: Payment Preferences and Product Returns') 
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -215,10 +215,6 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📊 Interactive E-Commerce Dashboard")
-st.markdown("Explore customer purchase data with interactive charts and filters.")
-
-@st.cache_data
 def load_data():
     df = pd.read_csv("ecommerce_customer_data_large.csv")
 
