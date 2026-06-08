@@ -85,6 +85,19 @@ sns.barplot(
     legend = False,
 )
 
+ax.set_ylim(
+    revenue_summary['Average Purchase Amount'].min() - 5,
+    revenue_summary['Average Purchase Amount'].max() + 5
+)
+
+for p in ax.patches:
+    ax.annotate(
+        f'{p.get_height():.2f}',
+        (p.get_x() + p.get_width()/2, p.get_height()),
+        ha='center',
+        va='bottom'
+    )
+
 plt.title ('Average Purchase Amount by Product Category', fontsize = 14, pad = 15, fontweight = 'bold')
 plt.xlabel('Product Category', fontsize = 12)
 plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
