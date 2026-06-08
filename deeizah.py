@@ -83,6 +83,7 @@ sns.barplot(
     palette = 'Set2',
     hue = 'Product Category',
     legend = False,
+    ax=ax
 )
 
 ax.set_ylim(
@@ -103,7 +104,7 @@ plt.xlabel('Product Category', fontsize = 12)
 plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
 
 plt.tight_layout()
-st.pyplot(fig)
+plt.pyplot(fig)
 
 st.subheader("OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)")
 
