@@ -227,8 +227,7 @@ if "Purchase Date" in df.columns:
         df["Purchase Date"] = pd.to_datetime(
         df["Purchase Date"], errors="coerce"
         )
-
-     return df
+    return df
 
 
 df = load_data()
