@@ -231,7 +231,7 @@ with tab3:
         payment_returns['Return Rate (%)'].min() - 1,
         payment_returns['Return Rate (%)'].max() + 1
     )
-     ax2.grid(axis='y', linestyle='--', alpha=0.7)
+    ax2.grid(axis='y', linestyle='--', alpha=0.7)
 
     plt.tight_layout()
     st.pyplot(fig)
