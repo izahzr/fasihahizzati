@@ -109,22 +109,22 @@ data['Age Group'] = pd.cut(data['Age'],
                                labels=['Youth', 'Young Adult', 'Middle Aged', 'Senior'])
 
     # 2. Aggregations
-    age_spending = data.groupby('Age Group', observed=False)['Total Purchase Amount'].sum().reset_index()
-    gender_spending = data.groupby('Gender')['Total Purchase Amount'].sum().reset_index()
-    core_profile = data.groupby(['Age Group', 'Gender'], observed=False)['Total Purchase Amount'].sum().reset_index()
-    core_profile = core_profile.sort_values(by='Total Purchase Amount', ascending=False).reset_index(drop=True)
+age_spending = data.groupby('Age Group', observed=False)['Total Purchase Amount'].sum().reset_index()
+gender_spending = data.groupby('Gender')['Total Purchase Amount'].sum().reset_index()
+core_profile = data.groupby(['Age Group', 'Gender'], observed=False)['Total Purchase Amount'].sum().reset_index()
+core_profile = core_profile.sort_values(by='Total Purchase Amount', ascending=False).reset_index(drop=True)
 
     # Display tables
-    print("--- 1. Spending by Age Group ---")
-    print(age_spending)
-    print("\n--- 2. Spending by Gender ---")
-    print(gender_spending)
-    print("\n--- 3. Platform Core Customer Rankings (Combined Profile) ---")
-    print(core_profile)
+print("--- 1. Spending by Age Group ---")
+print(age_spending)
+print("\n--- 2. Spending by Gender ---")
+print(gender_spending)
+print("\n--- 3. Platform Core Customer Rankings (Combined Profile) ---")
+print(core_profile)
     
-    top_segment = core_profile.iloc[0]
-    print(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
-    print(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
+top_segment = core_profile.iloc[0]
+print(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
+print(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
 
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
