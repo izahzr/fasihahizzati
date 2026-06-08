@@ -100,7 +100,7 @@ with tab1:
             ha='center',
             va='bottom'
         )
-    ax1.grid(axis='y', linestyle='--', alpha=0.7)
+    ax.grid(axis='y', linestyle='--', alpha=0.7)
     plt.title ('Average Purchase Amount by Product Category', fontsize = 14, pad = 15, fontweight = 'bold')
     plt.xlabel('Product Category', fontsize = 12)
     plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
