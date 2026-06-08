@@ -44,7 +44,7 @@ fig, ax = plt.subplots(figsize = (10,6))
 df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
 st.pyplot(fig)
 
-print ('Objective 1 : Average Purchase Amount by Product Category')
+st.subheader("Objective 1 : Average Purchase Amount by Product Category")
 import pandas as pd
 
 data = pd.read_csv("ecommerce_customer_data_large.csv")
@@ -92,7 +92,7 @@ plt.ylabel('Average Purchase Amount ($)', fontsize = 12)
 plt.tight_layout()
 st.pyplot(fig)
 
-print('OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)')
+st.subheader("OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)")
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -151,7 +151,7 @@ st.pyplot(fig)
 
 
     
-print ('OBJECTIVE 3: Payment Preferences and Product Returns') 
+st.subheader("OBJECTIVE 3: Payment Preferences and Product Returns") 
 
 import pandas as pd
 import matplotlib.pyplot as plt
