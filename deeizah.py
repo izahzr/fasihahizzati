@@ -48,7 +48,6 @@ st.subheader("Objective 1 : Average Purchase Amount by Product Category")
 import pandas as pd
 
 data = pd.read_csv("ecommerce_customer_data_large.csv")
-print (data)
 data.info ()
 data.isnull().sum()
 data.dropna (inplace =  True )
@@ -57,8 +56,6 @@ data.duplicated ().sum ()
 data
 data.info ()
 summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
-
-print (summary)
 
 revenue_summary = data.groupby ('Product Category')['Total Purchase Amount'].mean ().reset_index()
 
