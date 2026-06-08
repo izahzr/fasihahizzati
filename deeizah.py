@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 
 st.image('e-commerce-png-ecommerce-png-png-image-510.png')
+st.set_page_config(
+    page_title="E-Commerce Dashboard",
+    page_icon="📊",
+    layout="wide"
 
 st.date_input("Select a date")
 
