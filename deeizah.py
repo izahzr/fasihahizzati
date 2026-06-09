@@ -66,24 +66,28 @@ with tab1:
 
     st.subheader("Summary Statistics")
     st.table(summary)
+    
+    col1, col2 = st.columns(2)
 
-    #histogram
-    st.subheader("Histogram")
-    column = st.selectbox("Choose a column",df.columns)
-    fig, ax = plt.subplots(figsize = (10,6))
-    df[column].plot(kind = 'hist', ax =ax)
-    st.pyplot(fig)
-    fig = px.histogram(df, x=column)
-    fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
-    st.plotly_chart(fig)
+    with col1:
+        #histogram
+        st.subheader("Histogram")
+        column = st.selectbox("Choose a column",df.columns)
+        fig, ax = plt.subplots(figsize = (10,6))
+        df[column].plot(kind = 'hist', ax =ax)
+        st.pyplot(fig)
+        fig = px.histogram(df, x=column)
+        fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
+        st.plotly_chart(fig)
 
-    #Scatter chart
-    st.subheader("Scatter Chart")
-    x_column = st.selectbox("Choose x-axis column",df.columns)
-    y_column = st.selectbox("Choose y-axis column",df.columns)
-    fig, ax = plt.subplots(figsize = (10,6))
-    df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
-    st.pyplot(fig)
+    with col2:
+        #Scatter chart
+        st.subheader("Scatter Chart")
+        x_column = st.selectbox("Choose x-axis column",df.columns)
+        y_column = st.selectbox("Choose y-axis column",df.columns)
+        fig, ax = plt.subplots(figsize = (10,6))
+        df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
+        st.pyplot(fig)
 
 with tab2: 
     st.subheader("Objective 1 : Average Purchase Amount by Product Category")
