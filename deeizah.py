@@ -41,48 +41,51 @@ total_orders = len(df)
 avg_purchase = df["Total Purchase Amount"].mean()
 return_rate = df["Returns"].mean() * 100
 
-st.subheader("📈 Key Performance Indicators")
 
-col1, col2, col3, col4, col5 = st.columns(5)
-
-col1.metric("💰 Revenue", f"${total_revenue:,.0f}")
-col2.metric("👥 Customers", total_customers)
-col3.metric("🛒 Orders", total_orders)
-col4.metric("📊 Avg Purchase", f"${avg_purchase:.2f}")
-col5.metric("🔄 Return Rate", f"{return_rate:.2f}%")
-
-
-summary = df[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
-summary = summary.round(2)
-
-st.subheader("Summary Statistics")
-st.table(summary)
-
-#histogram
-st.subheader("Histogram")
-column = st.selectbox("Choose a column",df.columns)
-fig, ax = plt.subplots(figsize = (10,6))
-df[column].plot(kind = 'hist', ax =ax)
-st.pyplot(fig)
-fig = px.histogram(df, x=column)
-fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
-st.plotly_chart(fig)
-
-#Scatter chart
-st.subheader("Scatter Chart")
-x_column = st.selectbox("Choose x-axis column",df.columns)
-y_column = st.selectbox("Choose y-axis column",df.columns)
-fig, ax = plt.subplots(figsize = (10,6))
-df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
-st.pyplot(fig)
-
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4 = st.tabs([
+    "📋 Summary",
     "📊 Objective 1",
     "👥 Objective 2",
     "💳 Objective 3"
 ])
 
-with tab1: 
+with tab1:
+    st.subheader("📈 Key Performance Indicators")
+
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    col1.metric("💰 Revenue", f"${total_revenue:,.0f}")
+    col2.metric("👥 Customers", total_customers)
+    col3.metric("🛒 Orders", total_orders)
+    col4.metric("📊 Avg Purchase", f"${avg_purchase:.2f}")
+    col5.metric("🔄 Return Rate", f"{return_rate:.2f}%")
+
+
+    summary = df[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
+    summary = summary.round(2)
+
+    st.subheader("Summary Statistics")
+    st.table(summary)
+
+    #histogram
+    st.subheader("Histogram")
+    column = st.selectbox("Choose a column",df.columns)
+    fig, ax = plt.subplots(figsize = (10,6))
+    df[column].plot(kind = 'hist', ax =ax)
+    st.pyplot(fig)
+    fig = px.histogram(df, x=column)
+    fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
+    st.plotly_chart(fig)
+
+    #Scatter chart
+    st.subheader("Scatter Chart")
+    x_column = st.selectbox("Choose x-axis column",df.columns)
+    y_column = st.selectbox("Choose y-axis column",df.columns)
+    fig, ax = plt.subplots(figsize = (10,6))
+    df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
+    st.pyplot(fig)
+
+with tab2: 
     st.subheader("Objective 1 : Average Purchase Amount by Product Category")
     data = pd.read_csv("ecommerce_customer_data_large.csv")
     summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
@@ -135,7 +138,7 @@ with tab1:
     plt.tight_layout()
     st.pyplot(fig)
 
-with tab2:
+with tab3:
     st.subheader("OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)")
     
     data = df.copy()
@@ -189,7 +192,7 @@ with tab2:
     st.pyplot(fig)
 
 
-with tab3:    
+with tab4:    
     st.subheader("OBJECTIVE 3: Payment Preferences and Product Returns") 
 
     data = df.copy()
