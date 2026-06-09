@@ -296,7 +296,8 @@ with tab4:
         payment_returns['Return Rate (%)'].max() + 1
     )
     ax2.grid(axis='y', linestyle='--', alpha=0.7)
-
+    
+    fig.subplots_adjust(hspace=0.6)
     plt.tight_layout()
     st.pyplot(fig)
 
