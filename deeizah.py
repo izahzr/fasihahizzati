@@ -17,7 +17,7 @@ This is my first time using streamlit.""")
 #upload data
 upload_file = st.file_uploader("ecommerce_customer_data_large.csv")
 
-data = pd.read_csv("ecommerce_customer_data_large.csv")
+df = pd.read_csv("ecommerce_customer_data_large.csv")
 summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
 
@@ -26,9 +26,9 @@ st.table(summary)
 
 #histogram
 st.subheader("Histogram")
-column = st.selectbox("Choose a column",data.columns)
+column = st.selectbox("Choose a column",df.columns)
 fig, ax = plt.subplots(figsize = (10,6))
-data[column].plot(kind = 'hist', ax =ax)
+df[column].plot(kind = 'hist', ax =ax)
 st.pyplot(fig)
 fig = px.histogram(data, x=column)
 fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
@@ -36,10 +36,10 @@ st.plotly_chart(fig)
 
 #Scatter chart
 st.subheader("Scatter Chart")
-x_column = st.selectbox("Choose x-axis column",data.columns)
-y_column = st.selectbox("Choose y-axis column",data.columns)
+x_column = st.selectbox("Choose x-axis column",df.columns)
+y_column = st.selectbox("Choose y-axis column",df.columns)
 fig, ax = plt.subplots(figsize = (10,6))
-data.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
+df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
 st.pyplot(fig)
 
 tab1, tab2, tab3 = st.tabs([
