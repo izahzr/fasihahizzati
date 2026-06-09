@@ -5,14 +5,19 @@ import plotly.express as px
 import seaborn as sns
 import zipfile
 
-st.image('e-commerce-png-ecommerce-png-png-image-510.png')
 st.set_page_config(
     page_title="E-Commerce Dashboard",
     page_icon="📊",
     layout="wide"
 )
 st.date_input("Select a date")
+col1, col2, col3 = st.columns([1,1,1])
 
+with col2:
+    st.image(
+        "e-commerce-png-ecommerce-png-png-image-510.png",
+        width=250
+    )
 st.title(""" 📊 Welcome to our E-commerce Customer Analytics Dashboard """)
 
 st.subheader("E-Commerce Customer Analytics Dashboard")
