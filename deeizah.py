@@ -233,6 +233,13 @@ with tab3:
         palette='muted',
         ax=ax2
     )
+    ax2.set_title('Revenue Distribution by Combined Age & Gender')
+    ax2.set_xlabel('Age Group')
+    ax2.set_ylabel('Total Sales ($)')
+    ax2.grid(axis='y', linestyle='--', alpha=0.5)
+
+    plt.tight_layout()
+    st.pyplot(fig)
 
 with tab4:    
     st.subheader("OBJECTIVE 3: Payment Preferences and Product Returns") 
