@@ -189,7 +189,7 @@ with tab3:
     st.write(f" IDENTIFIED CORE CUSTOMER PROFILE: {top_segment['Age Group']} {top_segment['Gender']}s")
     st.write(f"Total Sales Contribution from Core Profile: ${top_segment['Total Purchase Amount']:,}\n")
     
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(16, 7))
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12))
 
     # LEFT CHART: Pie Chart showing overall Age Group contribution
     colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
