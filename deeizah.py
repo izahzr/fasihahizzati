@@ -27,10 +27,21 @@ df.dropna(inplace=True)
 st.subheader("Raw Data")
 st.write(df)
 
-data.isnull().sum()
-data.dropna (inplace =  True )
-data.duplicated ().sum ()
-data.info ()
+st.subheader("Missing Values")
+st.write(data.isnull().sum())
+
+data.dropna(inplace=True)
+
+st.subheader("Number of Duplicates")
+st.write(data.duplicated().sum())
+
+st.subheader("Dataset Information")
+
+import io
+buffer = io.StringIO()
+data.info(buf=buffer)
+st.text(buffer.getvalue())
+
 summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
 
