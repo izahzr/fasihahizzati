@@ -43,7 +43,7 @@ return_rate = df["Returns"].mean() * 100
 
 
 tab1, tab2, tab3, tab4 = st.tabs([
-    "📋 Summary",
+    "📋 Key Findings & Summary",
     "📊 Objective 1",
     "👥 Objective 2",
     "💳 Objective 3"
