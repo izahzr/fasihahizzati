@@ -31,6 +31,16 @@ def load_data():
 df = load_data()
 df.to_csv("cleaned_ecommerce_data.csv", index=False)
 
+st.sidebar.header("Filters")
+
+selected_category = st.sidebar.selectbox(
+    "Product Category",
+    ["All"] + list(df["Product Category"].unique())
+)
+
+if selected_category != "All":
+    df = df[df["Product Category"] == selected_category]
+
 #show data
 st.subheader("Raw Data")
 st.write(df)
