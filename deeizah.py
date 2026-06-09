@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
+import seaborn as sns
+import zipfile
 
 st.image('e-commerce-png-ecommerce-png-png-image-510.png')
 st.set_page_config(
@@ -82,7 +84,6 @@ tab1, tab2, tab3 = st.tabs([
 
 with tab1: 
     st.subheader("Objective 1 : Average Purchase Amount by Product Category")
-    import pandas as pd
     data = pd.read_csv("ecommerce_customer_data_large.csv")
     summary = data [['Quantity','Total Purchase Amount', 'Customer Age']].agg (['min','max','mean'])
 
@@ -92,9 +93,7 @@ with tab1:
     revenue_summary = revenue_summary.sort_values(by = 'Average Purchase Amount', ascending = False)
                                
     revenue_summary.to_csv ('product_summary.csv',index = False)
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import seaborn as sns
+ 
 
     DF = pd.read_csv ('product_summary.csv')
     fig, ax = plt.subplots (figsize =(10,6))
@@ -139,11 +138,6 @@ with tab1:
 with tab2:
     st.subheader("OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)")
     
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    import zipfile
-
     data = df.copy()
             
     data.dropna(inplace=True)
@@ -197,10 +191,6 @@ with tab2:
 
 with tab3:    
     st.subheader("OBJECTIVE 3: Payment Preferences and Product Returns") 
-
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import zipfile
 
     data = df.copy()
             
