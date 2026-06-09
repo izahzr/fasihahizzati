@@ -17,8 +17,8 @@ This is my first time using streamlit.""")
 #upload data
 upload_file = st.file_uploader("ecommerce_customer_data_large.csv")
 
-df = pd.read_csv("ecommerce_customer_data_large.csv")
-summary = df[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
+data = pd.read_csv("ecommerce_customer_data_large.csv")
+summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
 
 st.subheader("Summary Statistics")
@@ -26,11 +26,11 @@ st.table(summary)
 
 #histogram
 st.subheader("Histogram")
-column = st.selectbox("Choose a column",df.columns)
+column = st.selectbox("Choose a column",data.columns)
 fig, ax = plt.subplots(figsize = (10,6))
-df[column].plot(kind = 'hist', ax =ax)
+data[column].plot(kind = 'hist', ax =ax)
 st.pyplot(fig)
-fig = px.histogram(df, x=column)
+fig = px.histogram(data, x=column)
 fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
 st.plotly_chart(fig)
 
