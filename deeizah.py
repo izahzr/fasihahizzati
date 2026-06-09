@@ -209,7 +209,7 @@ with tab3:
 
     
     plt.tight_layout()
-    plt.pyplot(fig)
+    st.pyplot(fig)
 
 
 with tab4:    
