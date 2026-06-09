@@ -155,7 +155,7 @@ with tab2:
     )
 
     plt.tight_layout()
-    st.pyplot(fig)
+    plt.pyplot(fig)
 
 with tab3:
     st.subheader("OBJECTIVE 2: Demographics & Spending Behavior (Dual Chart)")
