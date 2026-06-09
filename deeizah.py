@@ -15,13 +15,12 @@ st.title(""" 📊 Welcome to our E-commerce Dashboard
 This is my first time using streamlit.""")
 
 #upload data
-df = pd.read.csv("ecommerce_customer_data_large.csv")
+df = pd.read_csv("ecommerce_customer_data_large.csv")
 
 #show data
 st.subheader("Raw Data")
 st.write(df)
 
-df = pd.read_csv("ecommerce_customer_data_large.csv")
 summary = df[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
 
