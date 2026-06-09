@@ -13,7 +13,7 @@ st.date_input("Select a date")
 
 st.title(""" 📊 Welcome to our E-commerce Customer Analytics Dashboard """)
 
-st.title("E-Commerce Customer Analytics Dashboard")
+st.subheader("E-Commerce Customer Analytics Dashboard")
 #upload data
 
 @st.cache_data
