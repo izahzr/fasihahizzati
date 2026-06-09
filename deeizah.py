@@ -15,7 +15,7 @@ st.title(""" 📊 Welcome to our E-commerce Dashboard
 This is my first time using streamlit.""")
 
 #upload data
-#upload_file = st.file_uploader("Please upload here:", type = 'csv')
+upload_file = st.file_uploader("ecommerce_customer_data_large.csv")
 
 data = pd.read_csv("ecommerce_customer_data_large.csv")
 summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
