@@ -192,24 +192,47 @@ with tab3:
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
 
     # LEFT CHART: Pie Chart showing overall Age Group contribution
-    ax1.pie(age_spending['Total Purchase Amount'], 
-            labels=age_spending['Age Group'], 
-            autopct='%1.1f%%', 
-            startangle=140, 
-            colors=['#ff9999','#66b3ff','#99ff99','#ffcc99'])
-    ax1.set_title('Overall Sales Contribution by Age Group', fontsize=12, fontweight='bold')
-   
+    colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
+
+    wedges, texts, autotexts = ax1.pie(
+        age_spending['Total Purchase Amount'],
+        labels=None,
+        autopct='%1.1f%%',
+        startangle=140,
+        colors=colors
+    )
+
+    ax1.legend(
+        wedges,
+        age_spending['Age Group'],
+        title="Age Group",
+        loc="center left",
+        bbox_to_anchor=(1, 0.5)
+    )
+
+    ax1.set_title(
+        'Overall Sales Contribution by Age Group',
+        fontsize=12,
+        fontweight='bold'
+    )
     # RIGHT CHART: Grouped Bar Chart showing the interaction of Age Group & Gender
-    sns.barplot(data=data, x='Age Group', y='Total Purchase Amount', hue='Gender', 
-                estimator=sum, errorbar=None, palette='muted', ax=ax2)
-    ax2.set_title('Revenue Distribution by Combined Age & Gender', fontsize=12, fontweight='bold')
-    ax2.set_xlabel('Age Group')
-    ax2.set_ylabel('Total Sales ($)')
-    ax2.grid(axis='y', linestyle='--', alpha=0.5)
+    age_gender = (
+        data.groupby(['Age Group', 'Gender'], observed=False)['Total Purchase Amount']
+        .sum()
+        .reset_index()
+    )
 
-    plt.tight_layout()
-    st.pyplot(fig)
-
+    order = ['Youth', 'Middle Aged', 'Senior', 'Young Adult']
+    
+    sns.barplot(
+        data=age_gender,
+        x='Age Group',
+        y='Total Purchase Amount',
+        hue='Gender',
+        order=order,
+        palette='muted',
+        ax=ax2
+    )
 
 with tab4:    
     st.subheader("OBJECTIVE 3: Payment Preferences and Product Returns") 
