@@ -36,10 +36,10 @@ st.plotly_chart(fig)
 
 #Scatter chart
 st.subheader("Scatter Chart")
-x_column = st.selectbox("Choose x-axis column",df.columns)
-y_column = st.selectbox("Choose y-axis column",df.columns)
+x_column = st.selectbox("Choose x-axis column",data.columns)
+y_column = st.selectbox("Choose y-axis column",data.columns)
 fig, ax = plt.subplots(figsize = (10,6))
-df.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
+data.plot(kind = 'scatter', x=x_column, y=y_column, ax =ax)
 st.pyplot(fig)
 
 tab1, tab2, tab3 = st.tabs([
