@@ -11,15 +11,44 @@ st.set_page_config(
 )
 st.date_input("Select a date")
 
-st.title(""" 📊 Welcome to our E-commerce Dashboard
-This is my first time using streamlit.""")
+st.title(""" 📊 Welcome to our E-commerce Customer Analytics Dashboard """)
 
+st.title("E-Commerce Customer Analytics Dashboard")
 #upload data
-df = pd.read_csv("ecommerce_customer_data_large.csv")
+
+@st.cache_data
+def load_data():
+    df = pd.read_csv("ecommerce_customer_data_large.csv")
+
+    # Data Cleaning
+    df.dropna(inplace=True)
+    df.drop_duplicates(inplace=True)
+
+    return df
+
+df = load_data()
+df.to_csv("cleaned_ecommerce_data.csv", index=False)
 
 #show data
 st.subheader("Raw Data")
 st.write(df)
+
+total_revenue = df["Total Purchase Amount"].sum()
+total_customers = df["Customer ID"].nunique()
+total_orders = len(df)
+avg_purchase = df["Total Purchase Amount"].mean()
+return_rate = df["Returns"].mean() * 100
+
+st.subheader("📈 Key Performance Indicators")
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+col1.metric("💰 Revenue", f"${total_revenue:,.0f}")
+col2.metric("👥 Customers", total_customers)
+col3.metric("🛒 Orders", total_orders)
+col4.metric("📊 Avg Purchase", f"${avg_purchase:.2f}")
+col5.metric("🔄 Return Rate", f"{return_rate:.2f}%")
+
 
 summary = df[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
