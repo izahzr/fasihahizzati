@@ -273,7 +273,7 @@ with tab4:
              use_container_width=True)
 
    
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8,15))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8,15))
 
     # Left Chart: Returns by Category
     ax1.bar(category_returns['Product Category'], category_returns['Return Rate (%)'], color='#E74C3C', edgecolor='black')
