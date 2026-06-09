@@ -18,7 +18,7 @@ This is my first time using streamlit.""")
 upload_file = st.file_uploader("ecommerce_customer_data_large.csv")
 
 df = pd.read_csv("ecommerce_customer_data_large.csv")
-summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
+summary = df[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
 
 st.subheader("Summary Statistics")
