@@ -27,6 +27,16 @@ df.dropna(inplace=True)
 st.subheader("Raw Data")
 st.write(df)
 
+data.isnull().sum()
+data.dropna (inplace =  True )
+data.duplicated ().sum ()
+data.info ()
+summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
+summary = summary.round(2)
+
+st.subheader("Summary Statistics")
+st.table(summary)
+
 #histogram
 st.subheader("Histogram")
 column = st.selectbox("Choose a column",df.columns)
