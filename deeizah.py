@@ -17,31 +17,6 @@ This is my first time using streamlit.""")
 #upload data
 #upload_file = st.file_uploader("Please upload here:", type = 'csv')
 
-
-
-#df = pd.read_csv(r"C:\Users\welcome\Desktop\BSMS1306\streamlit\Tips.csv")
-df = pd.read_csv("ecommerce_customer_data_large.csv")
-#df = pd.read_csv(upload_file)
-df.dropna(inplace=True)
-#show data
-st.subheader("Raw Data")
-st.write(df)
-
-st.subheader("Missing Values")
-st.write(data.isnull().sum())
-
-data.dropna(inplace=True)
-
-st.subheader("Number of Duplicates")
-st.write(data.duplicated().sum())
-
-st.subheader("Dataset Information")
-
-import io
-buffer = io.StringIO()
-data.info(buf=buffer)
-st.text(buffer.getvalue())
-
 summary = data[['Quantity', 'Total Purchase Amount', 'Customer Age']].agg(['min', 'max', 'mean'])
 summary = summary.round(2)
 
