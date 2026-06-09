@@ -30,7 +30,7 @@ column = st.selectbox("Choose a column",df.columns)
 fig, ax = plt.subplots(figsize = (10,6))
 df[column].plot(kind = 'hist', ax =ax)
 st.pyplot(fig)
-fig = px.histogram(data, x=column)
+fig = px.histogram(df, x=column)
 fig.update_traces( marker = {"color":"purple", "line":{"color":"black","width":2}})
 st.plotly_chart(fig)
 
